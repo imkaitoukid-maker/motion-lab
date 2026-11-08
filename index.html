@@ -7,20 +7,20 @@
   <meta name="description" content="跃动动作实验室：用身体探索七种交互。摄像头姿态识别在浏览器本地运行。" />
   <title>跃动 · 动作实验室</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23fa693e'/%3E%3Cpath d='M20 42L30 20M34 44L44 22' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-BDlhbI85.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BqiurJuX.css">
+  <script type="module" crossorigin src="./assets/index-Cl_SeP_Z.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-dukK4ubd.css">
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="./" aria-label="跃动首页"><span class="brand-mark"><i></i><i></i></span><strong>跃动<span>MOTION LAB</span></strong><span class="version">PROTOTYPE 01</span></a>
+    <a class="brand" href="./" aria-label="跃动首页"><span class="brand-mark"><i></i><i></i></span><strong>跃动<span>MOTION LAB</span></strong><span class="version">PROTOTYPE 03</span></a>
     <nav><span class="local-badge"><span class="dot"></span>画面仅在本机处理</span><button class="quiet-button" id="helpBtn"><span class="help-mark">?</span>使用指南</button></nav>
   </header>
   <main>
     <section class="intro"><div><div class="eyebrow"><span></span> MOVE. PLAY. EXPLORE.</div><h1>让身体，成为控制器<span>。</span></h1><p>跳跃、挥动、奔跑。每一个动作，都有回应。</p></div><div class="intro-aside"><span class="edition">BODY INPUT / 001</span><span>为你的下一次互动，热个身 <span class="arrow">↙</span></span></div></section>
     <section class="workspace" aria-label="动作体验区">
       <div class="camera-panel">
-        <div class="panel-top"><div class="mode-switch" aria-label="输入模式"><button id="demoBtn" class="selected">演示预览</button><button id="cameraBtn">摄像头识别</button></div><span class="stage-status" id="stageStatus"><span class="dot"></span>演示中</span></div>
+        <div class="panel-top"><div class="mode-switch" aria-label="输入模式"><button id="demoBtn" class="selected">演示预览</button><button id="cameraBtn">单项识别</button><button id="freeCameraBtn">自由识别</button></div><span class="stage-status" id="stageStatus"><span class="dot"></span>演示中</span></div>
         <div class="stage" id="stage">
           <video id="camera" playsinline muted autoplay></video><canvas id="skeleton" aria-label="人体动作画面"></canvas>
           <div class="stage-grid"></div><div class="corner top-left"></div><div class="corner top-right"></div><div class="corner bottom-left"></div><div class="corner bottom-right"></div>
@@ -32,13 +32,13 @@
           <div class="stage-bottom"><div class="tracking-state" id="trackingState"><span class="focus-icon">⌖</span><div><strong id="trackingTitle">跟着示范，动起来</strong><span id="trackingSubtitle">开启摄像头，体验真实动作识别</span></div></div><button class="primary-button" id="startBtn"><span class="camera-icon"></span><span id="startLabel">开启摄像头</span><span>↗</span></button></div>
           <div class="loading-overlay" id="loadingOverlay" hidden><span class="spinner"></span><strong id="loadingText">正在准备摄像头…</strong><span>首次使用需要加载姿态模型</span></div>
         </div>
-        <div class="camera-tools"><div><button id="mirrorBtn" class="tool-button is-on" aria-pressed="true"><span>↔</span>镜像</button><button id="bonesBtn" class="tool-button is-on" aria-pressed="true"><span>⌘</span>骨架</button></div><div><button id="calibrateBtn" class="tool-button" disabled><span>⊕</span>重新校准</button><button id="settingsBtn" class="tool-button"><span>☷</span>设置</button></div></div>
+        <div class="camera-tools"><div><button id="mirrorBtn" class="tool-button is-on" aria-pressed="true"><span>↔</span>镜像</button><button id="bonesBtn" class="tool-button is-on" aria-pressed="true"><span>⌘</span>骨架</button><button id="switchCameraBtn" class="tool-button camera-flip-button" disabled><span>⟳</span><span id="switchCameraLabel">切换后置</span></button></div><div><button id="calibrateBtn" class="tool-button" disabled><span>⊕</span>重新校准</button><button id="settingsBtn" class="tool-button"><span>☷</span>设置</button></div></div>
       </div>
       <aside class="feedback-panel">
         <div class="feedback-top"><span class="eyebrow">动作反馈</span><span class="live-chip" id="feedbackMode">演示</span></div>
         <div class="action-heading"><div><span class="action-en" id="actionEn">JUMP</span><h2 id="actionName">原地跳</h2></div><span class="action-number" id="actionNumber">01<span>/ 07</span></span></div>
         <p class="action-brief" id="actionBrief">轻轻一跃，让能量升空</p>
-        <div class="playground" id="playground"><span class="playground-coordinate">RESPONSE / LIVE</span><div class="playground-ring ring-one"></div><div class="playground-ring ring-two"></div><div class="energy-shadow"></div><div class="energy-avatar" id="energyAvatar"><div class="avatar-face"><i></i><i></i></div><div class="avatar-leg left"></div><div class="avatar-leg right"></div></div><div class="effect-orb"></div><span class="effect-label" id="effectLabel">准备起跳</span></div>
+        <div class="playground" id="playground" data-state="idle"><span class="playground-coordinate">BODY RESPONSE</span><span class="avatar-status" id="avatarStatus">静止待机</span><div class="playground-ring ring-one"></div><div class="playground-ring ring-two"></div><div class="energy-shadow"></div><div class="energy-avatar articulated" id="energyAvatar"></div><div class="effect-orb"></div><span class="effect-label" id="effectLabel">等待识别</span></div>
         <div class="result-line"><span class="result-indicator" id="resultIndicator"></span><strong id="resultText" role="status" aria-live="polite">等待动作</strong><span id="resultCount">0 次</span></div>
         <div class="progress-track"><div id="actionProgress"></div></div>
         <div class="instruction"><span class="instruction-index">HOW TO</span><p id="actionGuide"></p></div>
@@ -50,7 +50,7 @@
     <footer><span>用动作，打开一点想象力。</span><span><span class="dot"></span>本地姿态识别<span class="footer-divider">/</span>单人 · 全身入镜</span></footer>
   </main>
 </div>
-<dialog id="helpDialog"><div class="dialog-top"><span class="eyebrow">QUICK START</span><button class="close-button" data-close="helpDialog" aria-label="关闭">×</button></div><h2>留一点空间，<br>让身体自由发挥。</h2><div class="help-steps"><div><b>01</b><p><strong>固定平板，全身入镜</strong><span>横屏使用更舒适。确保头顶、双脚和展开后的双手都有空间。</span></p></div><div><b>02</b><p><strong>开启摄像头，站直校准</strong><span>允许摄像头权限，双手自然下垂，按提示保持站立。</span></p></div><div><b>03</b><p><strong>选择动作，看见回应</strong><span>先逐项练习，再开启“自由识别”。键盘 1–7 也可切换动作。</span></p></div></div><p class="privacy-note">视频仅在当前设备内处理，不录制、不上传。摄像头模式需 HTTPS 或本机 localhost；iPad 请在 Safari 中打开。演示数据与真实识别记录会分开清空。</p><button class="primary-button dialog-primary" data-close="helpDialog">开始探索 <span>↗</span></button></dialog>
-<dialog id="settingsDialog"><div class="dialog-top"><span class="eyebrow">PREFERENCES</span><button class="close-button" data-close="settingsDialog" aria-label="关闭">×</button></div><h2>找到舒服的节奏。</h2><label class="setting-row"><span>识别灵敏度<small>灵敏更容易触发，稳健更能过滤小动作</small></span><select id="sensitivity"><option value="0.85">稳健</option><option value="1" selected>标准</option><option value="1.15">灵敏</option></select></label><label class="setting-row"><span>画面反馈<small>识别成功时，画面边缘轻轻闪光</small></span><input id="flashToggle" type="checkbox" checked /></label><div class="setting-note">若出现误触，优先选择一个动作单独练习，并重新站直校准。跳跃、下蹲和跑步需看见双脚。</div></dialog>
+<dialog id="helpDialog"><div class="dialog-top"><span class="eyebrow">QUICK START</span><button class="close-button" data-close="helpDialog" aria-label="关闭">×</button></div><h2>留一点空间，<br>让身体自由发挥。</h2><div class="help-steps"><div><b>01</b><p><strong>固定平板，全身入镜</strong><span>横屏使用更舒适。确保头顶、双脚和展开后的双手都有空间。</span></p></div><div><b>02</b><p><strong>开启自由识别，站直校准</strong><span>点击“自由识别”并允许摄像头权限，双手自然下垂，按提示保持站立。</span></p></div><div><b>03</b><p><strong>你做动作，小人回应</strong><span>无需预选，七种动作自动识别。识别成功时小人做对应动作，播放结束后静止。也可以切换“单项识别”练习。</span></p></div></div><p class="privacy-note">视频仅在当前设备内处理，不录制、不上传。摄像头模式需 HTTPS 或本机 localhost；iPad 请在 Safari 中打开。演示数据与真实识别记录会分开清空。</p><button class="primary-button dialog-primary" data-close="helpDialog">开始探索 <span>↗</span></button></dialog>
+<dialog id="settingsDialog"><div class="dialog-top"><span class="eyebrow">PREFERENCES</span><button class="close-button" data-close="settingsDialog" aria-label="关闭">×</button></div><h2>找到舒服的节奏。</h2><label class="setting-row"><span>识别灵敏度<small>灵敏更容易触发，稳健更能过滤小动作</small></span><select id="sensitivity"><option value="0.85">稳健</option><option value="1" selected>标准</option><option value="1.15">灵敏</option></select></label><label class="setting-row"><span>画面反馈<small>识别成功时，画面边缘轻轻闪光</small></span><input id="flashToggle" type="checkbox" checked /></label><div class="setting-row"><label for="soundToggle">成功提示音<small>摄像头每识别成功一次，播放一声短提示音</small></label><div class="sound-controls"><button id="testSoundBtn" type="button">试听</button><input id="soundToggle" aria-label="成功提示音" type="checkbox" checked /></div></div><div class="setting-note">若出现误触，优先选择一个动作单独练习，并重新站直校准。跳跃、下蹲和跑步需看见双脚。演示预览默认静音，可点击“试听”检查音效。</div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 </body></html>
