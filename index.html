@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#f5f4ef" />
-  <meta name="description" content="跃动动作实验室：用身体探索六种交互。摄像头姿态识别在浏览器本地运行。" />
+  <meta name="description" content="跃动动作实验室：用身体探索五种交互。摄像头姿态识别在浏览器本地运行。" />
   <title>跃动 · 动作实验室</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23fa693e'/%3E%3Cpath d='M20 42L30 20M34 44L44 22' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E" />
-  <script type="module" crossorigin src="./assets/index-CyOup6UY.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-ie4t8mFb.css">
+  <script type="module" crossorigin src="./assets/index-B-AcTjj-.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B_X5D8vo.css">
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="brand" href="./" aria-label="跃动首页"><span class="brand-mark"><i></i><i></i></span><strong>跃动<span>MOTION LAB</span></strong><span class="version">PROTOTYPE 08</span></a>
+    <a class="brand" href="./" aria-label="跃动首页"><span class="brand-mark"><i></i><i></i></span><strong>跃动<span>MOTION LAB</span></strong><span class="version">PROTOTYPE 10</span></a>
     <nav><span class="local-badge"><span class="dot"></span>画面仅在本机处理</span><button class="quiet-button" id="helpBtn"><span class="help-mark">?</span>使用指南</button></nav>
   </header>
   <main>
@@ -36,7 +36,7 @@
       </div>
       <aside class="feedback-panel">
         <div class="feedback-top"><span class="eyebrow">动作反馈</span><span class="live-chip" id="feedbackMode">演示</span></div>
-        <div class="action-heading"><div><span class="action-en" id="actionEn">HANDS UP</span><h2 id="actionName">双手举起</h2></div><span class="action-number" id="actionNumber">01<span>/ 06</span></span></div>
+        <div class="action-heading"><div><span class="action-en" id="actionEn">HANDS UP</span><h2 id="actionName">双手举起</h2></div><span class="action-number" id="actionNumber">01<span>/ 05</span></span></div>
         <p class="action-brief" id="actionBrief">双手举高，随时回应</p>
         <div class="playground" id="playground" data-state="idle"><span class="playground-coordinate">BODY RESPONSE</span><span class="avatar-status" id="avatarStatus">静止待机</span><div class="playground-ring ring-one"></div><div class="playground-ring ring-two"></div><div class="energy-shadow"></div><div class="energy-avatar articulated" id="energyAvatar"></div><div class="effect-orb"></div><span class="effect-label" id="effectLabel">等待识别</span></div>
         <div class="result-line"><span class="result-indicator" id="resultIndicator"></span><strong id="resultText" role="status" aria-live="polite">等待动作</strong><span id="resultCount">0 次</span></div>
@@ -50,7 +50,7 @@
     <footer><span>用动作，打开一点想象力。</span><span><span class="dot"></span>本地姿态识别<span class="footer-divider">/</span>单人 · 上半身入镜</span></footer>
   </main>
 </div>
-<dialog id="helpDialog"><div class="dialog-top"><span class="eyebrow">QUICK START</span><button class="close-button" data-close="helpDialog" aria-label="关闭">×</button></div><h2>留一点空间，<br>让身体自由发挥。</h2><div class="help-steps"><div><b>01</b><p><strong>固定平板，上半身入镜</strong><span>横屏使用更舒适。拍到头部、双肩和自然下垂的双手，头顶和两侧留出空间，无需拍到腿部。</span></p></div><div><b>02</b><p><strong>开启自由识别，站直校准</strong><span>点击“自由识别”并允许摄像头权限，双手自然下垂，按提示保持上半身稳定。</span></p></div><div><b>03</b><p><strong>你做动作，小人回应</strong><span>无需预选，六种动作自动识别。识别成功时小人做对应动作，播放结束后静止。也可以切换“单项识别”练习。</span></p></div></div><p class="privacy-note">视频仅在当前设备内处理，不录制、不上传。摄像头模式需 HTTPS 或本机 localhost；iPad 请在 Safari 中打开。演示数据与真实识别记录会分开清空。</p><button class="primary-button dialog-primary" data-close="helpDialog">开始探索 <span>↗</span></button></dialog>
-<dialog id="settingsDialog"><div class="dialog-top"><span class="eyebrow">PREFERENCES</span><button class="close-button" data-close="settingsDialog" aria-label="关闭">×</button></div><h2>找到舒服的节奏。</h2><label class="setting-row"><span>识别灵敏度<small>灵敏更容易触发，稳健更能过滤小动作</small></span><select id="sensitivity"><option value="0.85">稳健</option><option value="1" selected>标准</option><option value="1.15">灵敏</option></select></label><label class="setting-row"><span>画面反馈<small>识别成功时，画面边缘轻轻闪光</small></span><input id="flashToggle" type="checkbox" checked /></label><div class="setting-row"><label for="soundToggle">成功提示音<small>摄像头每识别成功一次，播放一声短提示音</small></label><div class="sound-controls"><button id="testSoundBtn" type="button">试听</button><input id="soundToggle" aria-label="成功提示音" type="checkbox" checked /></div></div><div class="setting-note">若出现误触，优先选择一个动作单独练习，并重新站直校准。双手举过头顶、抬高手肘并保持片刻，可从任意动作切换；普通跑步用胸前交替摆臂；向左／向右原地跑需要双手都偏向身体同一侧，连续来回摆动。演示预览默认静音，可点击“试听”检查音效。</div></dialog>
+<dialog id="helpDialog"><div class="dialog-top"><span class="eyebrow">QUICK START</span><button class="close-button" data-close="helpDialog" aria-label="关闭">×</button></div><h2>留一点空间，<br>让身体自由发挥。</h2><div class="help-steps"><div><b>01</b><p><strong>固定平板，上半身入镜</strong><span>横屏使用更舒适。拍到头部、双肩和自然下垂的双手，头顶和两侧留出空间，无需拍到腿部。</span></p></div><div><b>02</b><p><strong>开启自由识别，站直校准</strong><span>点击“自由识别”并允许摄像头权限，双手自然下垂，按提示保持上半身稳定。</span></p></div><div><b>03</b><p><strong>你做动作，小人回应</strong><span>无需预选，五种动作自动识别。识别成功时小人做对应动作，播放结束后静止。也可以切换“单项识别”练习。</span></p></div></div><p class="privacy-note">视频仅在当前设备内处理，不录制、不上传。摄像头模式需 HTTPS 或本机 localhost；iPad 请在 Safari 中打开。演示数据与真实识别记录会分开清空。</p><button class="primary-button dialog-primary" data-close="helpDialog">开始探索 <span>↗</span></button></dialog>
+<dialog id="settingsDialog"><div class="dialog-top"><span class="eyebrow">PREFERENCES</span><button class="close-button" data-close="settingsDialog" aria-label="关闭">×</button></div><h2>找到舒服的节奏。</h2><label class="setting-row"><span>识别灵敏度<small>灵敏更容易触发，稳健更能过滤小动作</small></span><select id="sensitivity"><option value="0.85">稳健</option><option value="1" selected>标准</option><option value="1.15">灵敏</option></select></label><label class="setting-row"><span>画面反馈<small>识别成功时，画面边缘轻轻闪光</small></span><input id="flashToggle" type="checkbox" checked /></label><div class="setting-row"><label for="soundToggle">成功提示音<small>摄像头每识别成功一次，播放一声短提示音</small></label><div class="sound-controls"><button id="testSoundBtn" type="button">试听</button><input id="soundToggle" aria-label="成功提示音" type="checkbox" checked /></div></div><div class="setting-note">若出现误触，优先选择一个动作单独练习，并重新站直校准。双手举过头顶、抬高手肘并保持片刻，可从任意动作切换；普通跑步用胸前交替摆臂。演示预览默认静音，可点击“试听”检查音效。</div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 </body></html>
